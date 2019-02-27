@@ -49,5 +49,7 @@ object MarvelGraph {
     val ranks = graph.pageRank(0.01)
     val ranked = nodesRDD.join(ranks.vertices).sortBy(-_._2._2)
     ranked.take(20) foreach println
+
+    sc.stop()
   }
 }

@@ -38,5 +38,7 @@ object KMeansClustering {
     
     val predictions = model.transform(normData)
     predictions.select("features", "prediction").show()
+
+    spark.stop()
   }
 }

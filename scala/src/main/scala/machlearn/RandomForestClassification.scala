@@ -56,5 +56,7 @@ object RandomForestClassification {
     val evaluator = new BinaryClassificationEvaluator
     val accuracy = evaluator.evaluate(predictions)
     println("accuracy = "+accuracy)
+
+    spark.stop()
   }
 }
