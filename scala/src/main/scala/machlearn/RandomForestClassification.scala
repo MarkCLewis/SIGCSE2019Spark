@@ -32,7 +32,7 @@ object RandomForestClassification {
       StructField("hoursPerWeek", IntegerType),
       StructField("nativeCountry", StringType),
       StructField("income", StringType)))
-    val data = spark.read.schema(schema).option("header", true).csv("data/adult.csv").cache()
+    val data = spark.read.schema(schema).option("header", true).csv("../data/adult.csv").cache()
     
     val stringFeatureCols = "workclass maritalStatus occupation relationship race sex".split(" ")
     val intFeatureCols = "age educationNum capitalGain capitalLoss hoursPerWeek".split(" ")

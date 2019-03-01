@@ -27,7 +27,7 @@ object SQLCensusDataC {
       StructField("nativeCountry", StringType),    
       StructField("income", StringType)    
     ))
-    val data = spark.read.schema(schema).option("header", true).csv("data/adult.csv").cache()
+    val data = spark.read.schema(schema).option("header", true).csv("../data/adult.csv").cache()
     data.createOrReplaceTempView("adult")
 
     val n = spark.sql("select count(age) from adult").head().getAs[Long](0)

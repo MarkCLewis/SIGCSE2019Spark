@@ -10,7 +10,7 @@ import org.apache.spark.SparkContext
 object SimpleAppRDD {
   def main(args: Array[String]): Unit = {
     val txtFile = "src/main/scala/withrdd/SimpleAppRDD.scala"
-    val conf = new SparkConf().setAppName("Sample Application").
+    val conf = new SparkConf().setAppName("Simple Application").
       setMaster("local[*]")
     val sc = new SparkContext(conf)
     sc.setLogLevel("WARN")

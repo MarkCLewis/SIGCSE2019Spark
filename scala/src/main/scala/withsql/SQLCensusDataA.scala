@@ -21,7 +21,7 @@ object SQLCensusDataA {
     spark.sparkContext.setLogLevel("WARN")
     import spark.implicits._
 
-    val csvFile = spark.read.textFile("data/adult.csv")
+    val csvFile = spark.read.textFile("../data/adult.csv")
     val firstLine = csvFile.first()
     val data = csvFile.filter(_ != firstLine).map(CensusData.parseLine).cache()
 

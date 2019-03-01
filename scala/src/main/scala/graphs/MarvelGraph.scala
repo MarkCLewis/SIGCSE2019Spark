@@ -18,7 +18,7 @@ object MarvelGraph {
     sc.setLogLevel("WARN")
 
     // Read in data
-    val nodes = scala.io.Source.fromFile("data/nodes.csv").getLines.drop(1).map { line =>
+    val nodes = scala.io.Source.fromFile("../data/nodes.csv").getLines.drop(1).map { line =>
       val comma = line.lastIndexOf(",")
       val (name, ntype) = line.trim.splitAt(comma)
       MarvelNode(name.filter(_ != '"'), ntype.drop(1))
@@ -26,7 +26,7 @@ object MarvelGraph {
     
     val indexMap = nodes.map { case (i, n) => n.name.take(20) -> i }.toMap
     
-    val edges = scala.io.Source.fromFile("data/hero-network.csv").getLines.drop(1).flatMap { line =>
+    val edges = scala.io.Source.fromFile("../data/hero-network.csv").getLines.drop(1).flatMap { line =>
       val Array(n1, n2) = line.trim.split("\",\"")
       val (name1, name2) = (n1.drop(1).trim, n2.dropRight(1).trim)
       Seq(Edge(indexMap(name1), indexMap(name2), ()), Edge(indexMap(name2), indexMap(name1), ()))

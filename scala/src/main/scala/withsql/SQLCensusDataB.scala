@@ -27,7 +27,7 @@ object SQLCensusDataB {
       StructField("nativeCountry", StringType),    
       StructField("income", StringType)    
     ))
-    val data = spark.read.schema(schema).option("header", true).csv("data/adult.csv").cache()
+    val data = spark.read.schema(schema).option("header", true).csv("../data/adult.csv").cache()
 
     val n = data.count()
     println("Fraction > 50K = " + data.filter('income === ">50K").count() / n.toDouble)

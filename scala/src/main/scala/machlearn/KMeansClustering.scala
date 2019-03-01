@@ -17,7 +17,7 @@ object KMeansClustering {
     spark.sparkContext.setLogLevel("WARN")
     import spark.implicits._
 
-    val csvData = spark.read.option("header", true).csv("data/LLCP2015.csv")
+    val csvData = spark.read.option("header", true).csv("../data/LLCP2015.csv")
     
     val columnsToKeep = "GENHLTH PHYSHLTH MENTHLTH POORHLTH EDUCA SEX MARITAL EMPLOY1".split(" ")
     

@@ -8,7 +8,7 @@ import utility.CensusData
  */
 object BasicCensusData {
   def main(args: Array[String]): Unit = {
-    val source = scala.io.Source.fromFile("data/adult.csv")
+    val source = scala.io.Source.fromFile("../data/adult.csv")
     val data = source.getLines().drop(1).map(CensusData.parseLine).toArray
     source.close()
 

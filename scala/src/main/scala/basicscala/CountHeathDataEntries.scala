@@ -1,8 +1,8 @@
 package basicscala
 
 object CountHealthDataEntries extends App {
-  val lines = scala.io.Source.fromFile("data/LLCP2015.csv").getLines()
-  val headers = lines.next().split(",").map(_.filter(_ != "\""))
+  val lines = scala.io.Source.fromFile("../data/LLCP2015.csv").getLines()
+  val headers = lines.next().split(",").map(_.filter(_ != '\"'))
   val counts = Array.fill(headers.length)((0,Set[String]()))
   for(line <- lines) {
     val items = line.split(",")
