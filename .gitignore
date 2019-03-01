@@ -1,5 +1,8 @@
 data/
 .metals
+__pycache__
+spark-warehouse
+.bloop
 
 # Created by https://www.gitignore.io/api/sbt,scala,eclipse
 
