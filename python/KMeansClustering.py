@@ -30,11 +30,12 @@ normData = normalizer.transform(dataWithFeatures)
 kmeans = KMeans().setK(5).setFeaturesCol("normFeatures")
 model = kmeans.fit(normData)
 
-cost = model.computeCost(normData)
-println("total cost = "+str(cost))
-println("cost distance = "+str(Math.sqrt(cost/normData.count())))
-
 predictions = model.transform(normData)
 predictions.select("features", "prediction").show()
+
+evaluator = ClusteringEvaluator()
+
+silhouette = evaluator.evaluate(predictions)
+print("Silhouette with squared euclidean distance = " + str(silhouette))
 
 spark.stop()

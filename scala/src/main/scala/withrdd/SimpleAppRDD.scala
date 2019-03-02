@@ -17,7 +17,7 @@ object SimpleAppRDD {
 
     val txtFileLines = sc.textFile(txtFile, 2).cache()
     val numVals = txtFileLines.filter(line => line.contains("val")).count()
-    println("Lines with val: %s".format(numVals))
+    println("Lines with val: %d".format(numVals))
     sc.stop()
   }
 }

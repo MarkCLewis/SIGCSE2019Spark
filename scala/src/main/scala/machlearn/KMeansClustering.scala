@@ -7,6 +7,7 @@ import org.apache.spark.sql.types.IntegerType
 import org.apache.spark.ml.clustering.KMeans
 import org.apache.spark.ml.feature.VectorAssembler
 import org.apache.spark.ml.feature.Normalizer
+import org.apache.spark.ml.evaluation.ClusteringEvaluator
 
 /**
  * Clustering on the BRFSS data set. https://www.cdc.gov/brfss/
@@ -24,7 +25,6 @@ object KMeansClustering {
     val typedData = columnsToKeep.foldLeft(csvData)((df, colName) => df.withColumn(colName, df(colName).cast(IntegerType).as(colName))).na.drop()
     val assembler = new VectorAssembler().setInputCols(columnsToKeep).setOutputCol("features")
     val dataWithFeatures = assembler.transform(typedData)
-    dataWithFeatures.show()
     
     val normalizer = new Normalizer().setInputCol("features").setOutputCol("normFeatures")
     val normData = normalizer.transform(dataWithFeatures)
@@ -32,13 +32,13 @@ object KMeansClustering {
     val kmeans = new KMeans().setK(5).setFeaturesCol("normFeatures")
     val model = kmeans.fit(normData)
     
-    val cost = model.computeCost(normData)
-    println("total cost = "+cost)
-    println("cost distance = "+math.sqrt(cost/normData.count()))
-    
     val predictions = model.transform(normData)
     predictions.select("features", "prediction").show()
 
+    val evaluator = new ClusteringEvaluator
+    val silhouette = evaluator.evaluate(predictions)
+    println(s"Silhouette with squared euclidean distance = $silhouette")
+    
     spark.stop()
   }
 }
