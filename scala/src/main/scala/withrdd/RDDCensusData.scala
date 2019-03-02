@@ -7,7 +7,7 @@ import org.apache.spark.rdd.RDD._
 
 object RDDCensusData {
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("Sample Application").setMaster("local[*]")
+    val conf = new SparkConf().setAppName("Census RDD Application").setMaster("local[*]")
     val sc = new SparkContext(conf)
     sc.setLogLevel("WARN")
 

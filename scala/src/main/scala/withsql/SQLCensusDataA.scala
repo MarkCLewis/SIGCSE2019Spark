@@ -17,7 +17,7 @@ class FracOver50K extends Aggregator[CensusData, (Int, Int), Double] {
 
 object SQLCensusDataA {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder.appName("Simple Application").master("local[*]").getOrCreate()
+    val spark = SparkSession.builder.appName("Census SQL-A Application").master("local[*]").getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
     import spark.implicits._
 

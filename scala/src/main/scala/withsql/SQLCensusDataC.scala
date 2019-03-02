@@ -6,7 +6,7 @@ import org.apache.spark.sql.functions._
 
 object SQLCensusDataC {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder.appName("Simple Application").master("local[*]").getOrCreate()
+    val spark = SparkSession.builder.appName("Census SQL-C Application").master("local[*]").getOrCreate()
     spark.sparkContext.setLogLevel("WARN")
     import spark.implicits._
     
