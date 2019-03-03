@@ -27,10 +27,11 @@ object SQLCensusDataB {
       StructField("nativeCountry", StringType),    
       StructField("income", StringType)    
     ))
-    val data = spark.read.schema(schema).option("header", true).csv("../data/adult.csv").cache()
+    val data = spark.read.schema(schema).option("header", true).
+      csv("../data/adult.csv").cache()
 
     val n = data.count()
-    println("Fraction > 50K = " + data.filter('income === ">50K").count() / n.toDouble)
+    println("Fraction > 50K = " + data.filter($"income" === ">50K").count() / n.toDouble)
     println("Average age = "+data.agg(avg('age)).collect().head(0))
     println("Age stats = "+data.describe("age").collect().mkString(", "))
     val over50years = data.filter('age >= 50)

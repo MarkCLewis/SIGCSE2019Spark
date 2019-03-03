@@ -22,9 +22,13 @@ object KMeansClustering {
     
     val columnsToKeep = "GENHLTH PHYSHLTH MENTHLTH POORHLTH EDUCA SEX MARITAL EMPLOY1".split(" ")
     
-    val typedData = columnsToKeep.foldLeft(csvData)((df, colName) => df.withColumn(colName, df(colName).cast(IntegerType).as(colName))).na.drop()
-    val assembler = new VectorAssembler().setInputCols(columnsToKeep).setOutputCol("features")
+    val typedData = columnsToKeep.foldLeft(csvData)((df, colName) => 
+      df.withColumn(colName, df(colName).cast(IntegerType).as(colName))).na.drop()
+    val assembler = new VectorAssembler().setInputCols(columnsToKeep).
+      setOutputCol("features")
     val dataWithFeatures = assembler.transform(typedData)
+//    dataWithFeatures.show()
+//    dataWithFeatures.printSchema()
     
     val normalizer = new Normalizer().setInputCol("features").setOutputCol("normFeatures")
     val normData = normalizer.transform(dataWithFeatures)

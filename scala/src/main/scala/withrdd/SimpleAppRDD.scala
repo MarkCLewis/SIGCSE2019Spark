@@ -18,6 +18,17 @@ object SimpleAppRDD {
     val txtFileLines = sc.textFile(txtFile, 2).cache()
     val numVals = txtFileLines.filter(line => line.contains("val")).count()
     println("Lines with val: %d".format(numVals))
+    
+    val wordCounts = txtFileLines.map(line => line.split(" ").
+        count(_.contains("val")))
+    val totalWords = wordCounts.reduce(_ + _)
+    println(totalWords)
+    
+    val totalWords2 = txtFileLines.aggregate(0)(
+        (cnt, line) => cnt + line.split(" ").count(_.contains("val")),
+        _+_)
+    println(totalWords2)    
+    
     sc.stop()
   }
 }
